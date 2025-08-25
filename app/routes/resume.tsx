@@ -48,7 +48,7 @@ export default function Resume() {
         loadResume();
     }, [id]);
     return (
-        <main className="pt-0">
+        <main className="pt-0 ">
             <nav className="resume-nav">
                 <Link to="/" className="back-button">
                     <img

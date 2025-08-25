@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { usePuterStore } from "~/lib/puter";
 
 export const meta = () => [
@@ -33,12 +33,20 @@ export default function Auth() {
                         ) : (
                             <>
                                 {auth.isAuthenticated ? (
+                                    <div className="flex flex-col gap-4">
                                     <button
                                         className="auth-button"
                                         onClick={auth.signOut}
-                                    >
+                                        >
                                         <p>Log Out</p>
                                     </button>
+                                    <Link
+                                        to="/"
+                                        className="home-button"
+                                        >
+                                        Return to Home
+                                    </Link>
+                                        </div>
                                 ) : (
                                     <button
                                         className="auth-button"
