@@ -66,7 +66,7 @@ export default function Upload() {
             companyName,
             jobTitle,
             jobDescription,
-            feedback: "",
+            feedback: null,
         };
 
         await kv.set(`resume: ${uuid}`, JSON.stringify(data));
@@ -90,10 +90,20 @@ export default function Upload() {
                 ? feedback.message.content
                 : feedback.message.content[0].text;
 
-        data.feedback = JSON.parse(feedbackText);
+        let parsedFeedback;
+        try {
+            parsedFeedback = JSON.parse(feedbackText);
+        } catch {
+            parsedFeedback = feedbackText;
+        }
 
-        setStatusText('Analysis complete, redirecting...');
-        console.log(data);
+        data.feedback = parsedFeedback;
+
+        // ✅ Save AFTER feedback is added
+        await kv.set(`resume: ${uuid}`, JSON.stringify(data));
+
+        setStatusText("Analysis complete, redirecting...");
+        navigate(`/resume/${uuid}`);
     };
 
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
