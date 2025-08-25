@@ -59,6 +59,14 @@ form {
     @apply flex flex-col items-start gap-8 w-full;
 }
 
+input::placeholder {
+  @apply text-gray-400
+}
+
+textarea::placeholder {
+  @apply text-gray-400
+}
+
 @layer components {
     .text-gradient {
       background: linear-gradient(90deg, #ab8c95, #000000, #8e97c5);
